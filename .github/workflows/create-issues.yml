@@ -1,0 +1,66 @@
+name: Create Issues with Labels
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate GitHub CLI
+        run: |
+          gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Issues with Labels
+        run: |
+          issues=(
+            "Project Planning: Conduct Brainstorming Session: Website Vision & Feature List|Project Planning"
+            "Project Planning: Review Current WordPress Website Structure & Content|Project Planning"
+            "Project Planning: Collect Feature Requests & Content Needs from ACM AUTH Members|Project Planning"
+            "Project Planning: Define User Roles & Permissions|Project Planning"
+            "Project Planning: Decide Content Management Approach (Custom CMS or Headless CMS)|Project Planning"
+            "Project Planning: Define Social Media Integration Requirements|Project Planning"
+            "Project Planning: Choose Technology Stack (Backend, Frontend, Database, Hosting)|Project Planning"
+            "Design & Architecture: Design System Architecture (Pages, APIs, Database)|Design & Architecture"
+            "Design & Architecture: Create Wireframes for Main Pages|Design & Architecture"
+            "Design & Architecture: Review & Validate UI/UX Mockups with ACM AUTH Members|Design & Architecture"
+            "Design & Architecture: Define Color Scheme, Fonts, and Branding|Design & Architecture"
+            "Development: Set Up Backend Framework & Initial Project Structure|Development"
+            "Development: Set Up Frontend Framework & Initial Project Structure|Development"
+            "Development: Implement Public Website Pages (Home, About, Events, Blog, Contact)|Development"
+            "Development: Develop Admin Dashboard for Content Management|Development"
+            "Development: Implement Authentication & Role-Based Access|Development"
+            "Development: Build REST/GraphQL APIs|Development"
+            "Development: Integrate Social Media API Content Fetching|Development"
+            "Development: Implement Auto-Post Creation from Social Media Data|Development"
+            "Development: Migrate Content from WordPress Website|Development"
+            "Development: Set Up Database Schema & Migrations|Development"
+            "Infrastructure & Deployment: Configure Web Server & Hosting Environment|Infrastructure & Deployment"
+            "Infrastructure & Deployment: Set Up CI/CD Pipeline for Deployment|Infrastructure & Deployment"
+            "Infrastructure & Deployment: Purchase/Configure Domain & SSL Certificates|Infrastructure & Deployment"
+            "Infrastructure & Deployment: Set Up Monitoring & Error Tracking|Infrastructure & Deployment"
+            "Infrastructure & Deployment: Define Backup Policy for Content & Database|Infrastructure & Deployment"
+            "Testing & Documentation: Define Testing Strategy (Unit, Integration, E2E)|Testing & Documentation"
+            "Testing & Documentation: Write Test Cases for Core Features|Testing & Documentation"
+            "Testing & Documentation: Test Social Media Synchronization Workflow|Testing & Documentation"
+            "Testing & Documentation: Conduct User Acceptance Testing|Testing & Documentation"
+            "Testing & Documentation: Write Project README & Setup Instructions|Testing & Documentation"
+            "Testing & Documentation: Document Content Editing & Management Guidelines|Testing & Documentation"
+            "Testing & Documentation: Create Contributor Guidelines & Code of Conduct|Testing & Documentation"
+            "Advanced Features: Members Area with Profiles & Achievements|Advanced Features"
+            "Advanced Features: Event Registration System|Advanced Features"
+            "Advanced Features: Newsletter Subscription System|Advanced Features"
+            "Advanced Features: Gamification Features (Badges, Points)|Advanced Features"
+            "Advanced Features: Job Board / Project Board|Advanced Features"
+            "Feedback & Maintenance: Prepare Maintenance & Update Plan|Feedback & Maintenance"
+            "Feedback & Maintenance: Collect Community Feedback for Future Improvements|Feedback & Maintenance"
+          )
+
+          # Loop through the list of issues and create them with labels
+          for issue in "${issues[@]}"; do
+            IFS='|' read -r issue_title label <<< "$issue"
+            gh issue create --title "$issue_title" --body "Automatically created task for $issue_title" --label "$label"
+          done
