@@ -1,10 +1,10 @@
-name: Setup Project Board and Issues
+name: Link Existing Issues to Project
 
 on:
   workflow_dispatch:
 
 jobs:
-  setup-project-board:
+  link-issues-to-project:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
@@ -14,36 +14,8 @@ jobs:
         run: |
           gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create GitHub Project Board
+      - name: Link Existing Issues to Project
         run: |
-          project_name="ACM AUTH Website Redesign"
-          project_description="Project board for the ACM AUTH website redesign."
-          project=$(gh api repos/${{ github.repository }}/projects --field name="$project_name" --field body="$project_description")
-          project_id=$(echo $project | jq -r '.id')
-          echo "Created project with ID: $project_id"
-          echo "project_id=$project_id" >> $GITHUB_ENV
-
-      - name: Create Columns in Project Board
-        run: |
-          project_id=$GITHUB_ENV.project_id
-          gh api --method POST "/projects/$project_id/columns" --field name="Project Planning"
-          gh api --method POST "/projects/$project_id/columns" --field name="Design & Architecture"
-          gh api --method POST "/projects/$project_id/columns" --field name="Development"
-          gh api --method POST "/projects/$project_id/columns" --field name="Infrastructure & Deployment"
-          gh api --method POST "/projects/$project_id/columns" --field name="Testing & Documentation"
-          gh api --method POST "/projects/$project_id/columns" --field name="Advanced Features"
-          gh api --method POST "/projects/$project_id/columns" --field name="Feedback & Maintenance"
-
-  create-issues:
-    runs-on: ubuntu-latest
-    needs: setup-project-board
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Create Issues
-        run: |
-          # Define a list of issues and corresponding columns
           issues=(
             "Project Planning: Conduct Brainstorming Session: Website Vision & Feature List"
             "Project Planning: Review Current WordPress Website Structure & Content"
@@ -87,8 +59,13 @@ jobs:
             "Feedback & Maintenance: Collect Community Feedback for Future Improvements"
           )
 
-          # Loop through the list of issues and create them
-          for issue in "${issues[@]}"; do
-            # Create the issue
-            gh issue create --title "$issue" --body "Automatically created task for $issue"
+          project_name="Team Website"
+
+          # Loop through the list of issues and link them to the project
+          for issue_title in "${issues[@]}"; do
+            # Get the issue number based on its title
+            issue_number=$(gh issue list --search "$issue_title" --json number -q ".[0].number")
+
+            # Link the issue to the project
+            gh project item add "$project_name" --id "$issue_number"
           done
