@@ -1,11 +1,39 @@
-name: Create Issues with Labels
+name: Create Labels and Issues
 
 on:
   workflow_dispatch:
 
 jobs:
+  create-labels:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate GitHub CLI
+        run: |
+          gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Labels
+        run: |
+          labels=(
+            "Project Planning"
+            "Design & Architecture"
+            "Development"
+            "Infrastructure & Deployment"
+            "Testing & Documentation"
+            "Advanced Features"
+            "Feedback & Maintenance"
+          )
+
+          # Loop through the labels and create them
+          for label in "${labels[@]}"; do
+            gh label create "$label" --color "B4B5B7" --description "Tasks related to $label"
+          done
+
   create-issues:
     runs-on: ubuntu-latest
+    needs: create-labels
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
