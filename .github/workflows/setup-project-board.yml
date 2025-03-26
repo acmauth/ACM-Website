@@ -10,7 +10,7 @@ jobs:
       - name: Create Project Board
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          ORG: "ACM-Auth" # Change this to your organization name
+          ORG: "acmauth"
           PROJECT_NAME: "ACM AUTH Website Redesign"
         run: |
           echo "Creating Project Board..."
