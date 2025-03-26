@@ -4,8 +4,39 @@ on:
   workflow_dispatch:
 
 jobs:
+  setup-project-board:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Authenticate GitHub CLI
+        run: |
+          gh auth login --with-token <<< ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create GitHub Project Board
+        run: |
+          project_name="ACM AUTH Website Redesign"
+          project_description="Project board for the ACM AUTH website redesign."
+          project=$(gh api repos/${{ github.repository }}/projects --field name="$project_name" --field body="$project_description")
+          project_id=$(echo $project | jq -r '.id')
+          echo "Created project with ID: $project_id"
+          echo "project_id=$project_id" >> $GITHUB_ENV
+
+      - name: Create Columns in Project Board
+        run: |
+          project_id=$GITHUB_ENV.project_id
+          gh api --method POST "/projects/$project_id/columns" --field name="Project Planning"
+          gh api --method POST "/projects/$project_id/columns" --field name="Design & Architecture"
+          gh api --method POST "/projects/$project_id/columns" --field name="Development"
+          gh api --method POST "/projects/$project_id/columns" --field name="Infrastructure & Deployment"
+          gh api --method POST "/projects/$project_id/columns" --field name="Testing & Documentation"
+          gh api --method POST "/projects/$project_id/columns" --field name="Advanced Features"
+          gh api --method POST "/projects/$project_id/columns" --field name="Feedback & Maintenance"
+
   create-issues:
     runs-on: ubuntu-latest
+    needs: setup-project-board
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
