@@ -66,6 +66,6 @@ jobs:
             # Get the issue number based on its title
             issue_number=$(gh issue list --search "$issue_title" --json number -q ".[0].number")
 
-            # Link the issue to the project
-            gh project item add "$project_name" --id "$issue_number"
+            # Link the issue to the project using item-add
+            gh project item-add "$project_name" --item-type issue --item-id "$issue_number"
           done
