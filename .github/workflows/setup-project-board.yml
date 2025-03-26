@@ -1,0 +1,41 @@
+name: Create ACM AUTH Project Board
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create-project-board:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Project Board
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ORG: "ACM-Auth" # Change this to your organization name
+          PROJECT_NAME: "ACM AUTH Website Redesign"
+        run: |
+          echo "Creating Project Board..."
+          QUERY='
+          mutation {
+            createProjectV2(input: {ownerId: "$ORG_ID", title: "'"$PROJECT_NAME"'"}) {
+              projectV2 {
+                id
+                title
+              }
+            }
+          }
+          '
+
+          # Get Organization ID
+          ORG_ID=$(curl -s -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d '{"query":"query { organization(login: \"'"$ORG"'\") { id } }"}' \
+            https://api.github.com/graphql | jq -r .data.organization.id)
+
+          # Run GraphQL Mutation
+          RESPONSE=$(curl -s -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Content-Type: application/json" \
+            -d '{"query":"'"${QUERY//\$ORG_ID/$ORG_ID}"'"}' \
+            https://api.github.com/graphql)
+
+          echo "Response:"
+          echo "$RESPONSE"
