@@ -4,90 +4,59 @@ on:
   workflow_dispatch:
 
 jobs:
-  create-project:
+  create-issues:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Create Project Board & Issues
-        uses: actions/github-script@v7
+      - name: Create Issues from Project Board
+        uses: imjohnbo/issue-bot@v3
         with:
-          script: |
-            const projectName = 'ACM AUTH Website Redesign';
-            const columns = ['To Do', 'In Progress', 'Review / Discussion', 'Done'];
-            const labels = ['backend', 'frontend', 'design', 'content', 'social-media', 'infrastructure', 'priority', 'discussion', 'documentation'];
-
-            const epics = {
-              'Project Planning': [
-                'Conduct Brainstorming Session: Website Vision & Feature List',
-                'Review Current WordPress Website Structure & Content',
-                'Collect Feature Requests & Content Needs from ACM AUTH Members',
-                'Define User Roles & Permissions',
-                'Decide Content Management Approach (Custom CMS or Headless CMS)',
-                'Define Social Media Integration Requirements',
-                'Choose Technology Stack (Backend, Frontend, Database, Hosting)'
-              ],
-              'Design & Architecture': [
-                'Design System Architecture (Pages, APIs, Database)',
-                'Create Wireframes for Main Pages',
-                'Review & Validate UI/UX Mockups with ACM AUTH Members',
-                'Define Color Scheme, Fonts, and Branding'
-              ],
-              'Development': [
-                'Set Up Backend Framework & Initial Project Structure',
-                'Set Up Frontend Framework & Initial Project Structure',
-                'Implement Public Website Pages (Home, About, Events, Blog, Contact)',
-                'Develop Admin Dashboard for Content Management',
-                'Implement Authentication & Role-Based Access',
-                'Build REST/GraphQL APIs',
-                'Integrate Social Media API Content Fetching',
-                'Implement Auto-Post Creation from Social Media Data',
-                'Migrate Content from WordPress Website',
-                'Set Up Database Schema & Migrations'
-              ],
-              'Infrastructure & Deployment': [
-                'Configure Web Server & Hosting Environment',
-                'Set Up CI/CD Pipeline for Deployment',
-                'Purchase/Configure Domain & SSL Certificates',
-                'Set Up Monitoring & Error Tracking',
-                'Define Backup Policy for Content & Database'
-              ],
-              'Testing & Documentation': [
-                'Define Testing Strategy (Unit, Integration, E2E)',
-                'Write Test Cases for Core Features',
-                'Test Social Media Synchronization Workflow',
-                'Conduct User Acceptance Testing',
-                'Write Project README & Setup Instructions',
-                'Document Content Editing & Management Guidelines',
-                'Create Contributor Guidelines & Code of Conduct'
-              ],
-              'Advanced Features': [
-                'Members Area with Profiles & Achievements',
-                'Event Registration System',
-                'Newsletter Subscription System',
-                'Gamification Features (Badges, Points)',
-                'Job Board / Project Board'
-              ],
-              'Feedback & Maintenance': [
-                'Prepare Maintenance & Update Plan',
-                'Collect Community Feedback for Future Improvements'
-              ]
-            };
-
-            const owner = context.repo.owner;
-            const repo = context.repo.repo;
-
-            // Create Issues
-            for (const [epic, tasks] of Object.entries(epics)) {
-              for (const task of tasks) {
-                await github.rest.issues.create({
-                  owner,
-                  repo,
-                  title: `[${epic}] ${task}`,
-                  labels: ['priority']
-                });
-              }
-            }
-
-            console.log('✅ Issues created for all epics and tasks');
+          title: |
+            ACM AUTH Website Redesign Tasks
+          body: |
+            Automatically generated issues from project board tasks.
+          labels: priority
+          assignees: ''
+          issues: |
+            Project Planning: Conduct Brainstorming Session: Website Vision & Feature List
+            Project Planning: Review Current WordPress Website Structure & Content
+            Project Planning: Collect Feature Requests & Content Needs from ACM AUTH Members
+            Project Planning: Define User Roles & Permissions
+            Project Planning: Decide Content Management Approach (Custom CMS or Headless CMS)
+            Project Planning: Define Social Media Integration Requirements
+            Project Planning: Choose Technology Stack (Backend, Frontend, Database, Hosting)
+            Design & Architecture: Design System Architecture (Pages, APIs, Database)
+            Design & Architecture: Create Wireframes for Main Pages
+            Design & Architecture: Review & Validate UI/UX Mockups with ACM AUTH Members
+            Design & Architecture: Define Color Scheme, Fonts, and Branding
+            Development: Set Up Backend Framework & Initial Project Structure
+            Development: Set Up Frontend Framework & Initial Project Structure
+            Development: Implement Public Website Pages (Home, About, Events, Blog, Contact)
+            Development: Develop Admin Dashboard for Content Management
+            Development: Implement Authentication & Role-Based Access
+            Development: Build REST/GraphQL APIs
+            Development: Integrate Social Media API Content Fetching
+            Development: Implement Auto-Post Creation from Social Media Data
+            Development: Migrate Content from WordPress Website
+            Development: Set Up Database Schema & Migrations
+            Infrastructure & Deployment: Configure Web Server & Hosting Environment
+            Infrastructure & Deployment: Set Up CI/CD Pipeline for Deployment
+            Infrastructure & Deployment: Purchase/Configure Domain & SSL Certificates
+            Infrastructure & Deployment: Set Up Monitoring & Error Tracking
+            Infrastructure & Deployment: Define Backup Policy for Content & Database
+            Testing & Documentation: Define Testing Strategy (Unit, Integration, E2E)
+            Testing & Documentation: Write Test Cases for Core Features
+            Testing & Documentation: Test Social Media Synchronization Workflow
+            Testing & Documentation: Conduct User Acceptance Testing
+            Testing & Documentation: Write Project README & Setup Instructions
+            Testing & Documentation: Document Content Editing & Management Guidelines
+            Testing & Documentation: Create Contributor Guidelines & Code of Conduct
+            Advanced Features: Members Area with Profiles & Achievements
+            Advanced Features: Event Registration System
+            Advanced Features: Newsletter Subscription System
+            Advanced Features: Gamification Features (Badges, Points)
+            Advanced Features: Job Board / Project Board
+            Feedback & Maintenance: Prepare Maintenance & Update Plan
+            Feedback & Maintenance: Collect Community Feedback for Future Improvements
