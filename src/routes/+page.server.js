@@ -1,4 +1,4 @@
-import { getWeather } from '$lib/server/weatherApi.js';
+import { getWeather } from '$lib/server/weatherAPI.js';
 
 
 // load() is a framework's native function that runs whenever

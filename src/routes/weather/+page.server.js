@@ -1,4 +1,4 @@
-import { getWeather } from '$lib/server/weatherApi.js';
+import { getWeather } from '$lib/server/weatherAPI.js';
 
 export async function load({ url }) {
   const lat = url.searchParams.get('lat');
