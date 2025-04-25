@@ -1,5 +1,5 @@
 {
-	"name": "acm-website",
+	"name": "my-website",
 	"private": true,
 	"version": "0.0.1",
 	"type": "module",
@@ -17,6 +17,6 @@
 		"vite": "^6.2.5"
 	},
 	"dependencies": {
-		"boostrap": "^2.0.0"
+		"bootstrap": "^5.3.5"
 	}
 }
