@@ -26,6 +26,9 @@
           <li class="nav-item">
           <a class="nav-link" href="/weather">Weather</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/events">Events</a>
+          </li>
       </ul>
       </div>
   </div>
