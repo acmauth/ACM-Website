@@ -4,9 +4,9 @@
     export let date = "";
   </script>
 
-<div class="card shadow-lg rounded-4 border-0">
-    <a href="/" title={name} class="image-link">
-        <img loading="lazy" src={image} class="card-img-top rounded-top-4 img-fluid " alt={name} />
+<div class="card shadow-lg rounded-4 border border-dark">
+    <a href="/" title={name} class="image-link ratio ratio-16x9">
+        <img loading="lazy" src={image} class="card-img-top rounded-top-4 img-fluid object-fit-cover" alt={name} />
     </a>
    
     <div class="card-body text-center">

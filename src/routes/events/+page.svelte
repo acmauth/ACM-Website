@@ -16,8 +16,11 @@
         
 </script>
 
-<div class="container py-5 text-center">
-    <h1>Events Calendar</h1>
+<div class=" py-5 text-center bg-body-secondary w-100" style="background-image: url('https://static.vecteezy.com/system/resources/thumbnails/008/617/161/small/abstract-gradient-pastel-blue-and-purple-background-neon-pastel-color-template-for-website-or-presentation-free-free-vector.jpg'); background-size: cover; background-position: center;">
+    <div class="container-fluid text-white py-5" style="background: linear-gradient(to right,#ffffff,#7dd0f0); position:relative;">
+        <h1 class="fw-bold">Events Calendar</h1>
+    </div>
+    
     <p class="lead">This is a demo</p>
     {#if upComingEvents.length!==0}
         <div class=" container py-5 col-12 col-md-8 col-lg-6  justify-content-center">
@@ -46,7 +49,7 @@
         </div>
     {/if}
 
-    <div class=" p-4 mt-5 border border-dark" style="border-radius: 8px;">
+    <div class=" p-4 mt-5 border border-dark container" style="border-radius: 8px;">
             {#if events}   
                  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
                     {#each events as event }
