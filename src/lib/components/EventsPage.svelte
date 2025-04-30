@@ -13,21 +13,16 @@
        </div>
 
         <div class="container py-5 justify-content-center">
-            <div class="image-link ratio ratio-16x9">
-                <img loading="lazy" src={image} class="card-img-top rounded-top-4 img-fluid object-fit-cover" alt={name} />
+            <div class=" ratio ratio-16x9 d-flex justify-content-center">
+                <img loading="lazy" src={image} class="card-img-top rounded-top-4 img-fluid object-fit-contain w-75 " style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; margin: auto;" alt={name} />
             </div>
             <p>
                {description} 
             </p>
             <p class="small mt-3">
-                Location:{location}
+                Location:{location} <br>
                 Date:{date}
             </p>
         </div>
-       
-   
-        
-    
-
 
   </div>
