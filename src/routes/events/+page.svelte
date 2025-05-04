@@ -1,14 +1,15 @@
 <script>
    
     import EventCard from '$lib/components/EventCard.svelte';
+    import Timeline from '$lib/components/Timeline.svelte';
     let events=[
      {name:"Event 1",date:"September 1,2007",image:"https://auth.acm.org/wp-content/uploads/2021/10/meet-ACM-Facebook-banner-1536x796.png",id:"event-1"}, 
      {name:"Event 2",date:"October 22,2007",image:"https://auth.acm.org/wp-content/uploads/2021/10/Campus-tour.png", id:"event-2"},
-     {name:"Event 3",date:"October 29,2007",image:"https://auth.acm.org/wp-content/uploads/2021/03/git1.png",id:"event-3"},
+     {name:"Event 3",date:"October 29,2025",image:"https://auth.acm.org/wp-content/uploads/2021/03/git1.png",id:"event-3"},
      {name:"Event 4",date:"November 16,2007",image:"https://auth.acm.org/wp-content/uploads/2021/02/Linux-1.png"},
-     {name:"Event 5",date:"November 24,2007",image:"https://auth.acm.org/wp-content/uploads/2022/05/Picture2.png"},
+     {name:"Event 5",date:"November 24,2015",image:"https://auth.acm.org/wp-content/uploads/2022/05/Picture2.png"},
      {name:"Event 6",date:"December 3,2007",image:"https://auth.acm.org/wp-content/uploads/2020/12/76974937_1462395150575663_4064387411164004352_o.jpg"},
-     {name:"Event 7",date:"December 19,2007",image:"https://auth.acm.org/wp-content/uploads/2020/12/29178681_977989562349560_3687398306025046016_o.jpg"}
+     {name:"Event 7",date:"December 19,2009",image:"https://auth.acm.org/wp-content/uploads/2020/12/29178681_977989562349560_3687398306025046016_o.jpg"}
     ];
     let upComingEvents=[{name:"Event 1",date:"September 1,2008",image:"https://auth.acm.org/wp-content/uploads/2021/10/meet-ACM-Facebook-banner-1536x796.png"},
     {name:"Event 2",date:"October 1,2008",image:"https://auth.acm.org/wp-content/uploads/2021/10/Campus-tour.png"},
@@ -48,21 +49,12 @@
             </div>
         </div>
     {/if}
-    <h2 class="text-white fw-bold fs-1 text-decoration-underline">Our events</h2>
+    <h2 class="fw-bold fs-1">Our events</h2>
     <div class=" p-4 mt-5 border border-dark container" style="border-radius: 8px;">
             {#if events}   
-                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-                    {#each events as event }
-                        <div class="col">
-                            <EventCard 
-                            name={event.name}
-                            image={event.image}
-                            date={event.date}
-                            id={event.id}
-                            />
-                        </div>     
-                    {/each}
-                </div>     
+                <div class="container py-5">
+                    <Timeline {events} />
+                </div>
             {:else}
                     <p>No events to show</p>
             {/if}       
