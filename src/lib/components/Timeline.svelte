@@ -1,3 +1,4 @@
+<!-- JAVASCIPT -->
 <script>
     import EventCard from '$lib/components/EventCard.svelte';
     export let events = [];
@@ -54,7 +55,41 @@
         selectYear(startYear);
     }
 </script>
-  
+
+<!-- STYLE -->
+<style>
+    .timeline {
+        display: flex;
+        flex-grow: 1;
+        overflow: auto;
+        scrollbar-width: none;
+    }
+    .timeline-item {
+        min-width: 50px;
+        flex-shrink: 0;
+        margin-right: 8px;
+    }
+    .timeline-item .btn {
+        width: 100%;
+    }
+    button.active {
+        background-color: #0d6efd;
+        color: #fff;
+        border-color: #0d6efd;
+    }
+    .title {
+        font-size: 1.5rem;
+        font-weight: 650;
+        color: #004d80;
+    }
+    .text {
+        font-size: 1rem;
+        color: #004d80;
+    }
+</style>
+
+<!-- HTML -->
+
 <!-- Timeline container -->
 <div class="d-flex align-items-center">
     <!-- Scroll to latest year button -->
@@ -96,7 +131,7 @@
 <!-- Show events for selected year -->
 {#if selectedYear}
     <div class="mt-4">
-        <h3>Events in {selectedYear}</h3>
+        <h3 class="title">Events in {selectedYear}</h3>
         {#if events.filter(e => new Date(e.date).getFullYear() === selectedYear).length}
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
                 {#each events as event}
@@ -108,29 +143,7 @@
                 {/each}
             </div>
         {:else}
-            <p>No events in {selectedYear}.</p>
+            <p class="text">No events in {selectedYear}</p>
         {/if}
     </div>
 {/if}
-  
-<style>
-    .timeline {
-        display: flex;
-        flex-grow: 1;
-        overflow: auto;
-        scrollbar-width: none;
-    }
-    .timeline-item {
-        min-width: 50px;
-        flex-shrink: 0;
-        margin-right: 8px;
-    }
-    .timeline-item .btn {
-        width: 100%;
-    }
-    button.active {
-        background-color: #0d6efd;
-        color: #fff;
-        border-color: #0d6efd;
-    }
-</style>
