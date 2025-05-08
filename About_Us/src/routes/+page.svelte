@@ -5,14 +5,23 @@
 <!-- style -->
 <style>
     .box{
-        height:340px;
-        width:500px;
         background-color:lightblue;
-        justify-content: center;
+        text-align:center;
+        
     }
 </style>
 
 <!-- main body -->
-<div class="box">
-    <h1>About Us</h1>
+<!--logo-->
+<div class="container-fluid p-2">
+    <div class="d-flex align-items-center">
+        <img source="/logo.png" class="logo me-3" style="height:40px  />
+    </div>
+</div>
+
+
+<div class="container-fluid p-0">
+    <div class="box">
+        <h1>About Us!</h1>
+    </div>
 </div>
