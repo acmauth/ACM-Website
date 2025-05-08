@@ -1,11 +1,18 @@
 <script>
-    import { Row, Col, Button } from '@sveltestrap/sveltestrap';
-  </script>
-  
-  <Row class="my-5 text-center">
-    <Col>
-      <h1>Hello from <strong>Sveltestrap</strong>!</h1>
-      <Button color="primary">Click me</Button>
-    </Col>
-  </Row>
-  
+    
+</script>
+
+<!-- style -->
+<style>
+    .box{
+        height:340px;
+        width:500px;
+        background-color:lightblue;
+        justify-content: center;
+    }
+</style>
+
+<!-- main body -->
+<div class="box">
+    <h1>About Us</h1>
+</div>
