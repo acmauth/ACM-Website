@@ -5,22 +5,21 @@
   
     let scrollContainer;
     let selectedYear;
-  
-    const startYear = 2007;
-    const endYear = new Date().getFullYear(); // Current year
-  
-    // Create a descending list of years from endYear to startYear
     let years = [];
-    $: {
-        years = [];
-        for (let y = endYear; y >= startYear; y--) {
-            years.push(y);
-        }
-    }
   
-    // Initialize selection to endYear if no year is selected 
+    // Create a descending set of the years that events occurred
+    $: {
+        let yearsSet = new Set();
+        for (const event of events) {
+            const year = new Date(event.date).getFullYear();
+            yearsSet.add(year);
+        }
+        years = Array.from(yearsSet).sort((a, b) => b - a);
+    }
+
+    // Initialize selection to the last year if no year is selected 
     $: if (years.length != 0 && selectedYear === undefined) {
-        selectedYear = endYear;
+        selectedYear = years[0];
     }
   
     function selectYear(year) {
@@ -55,38 +54,6 @@
         selectYear(startYear);
     }
 </script>
-
-<!-- STYLE -->
-<style>
-    .timeline {
-        display: flex;
-        flex-grow: 1;
-        overflow: auto;
-        scrollbar-width: none;
-    }
-    .timeline-item {
-        min-width: 50px;
-        flex-shrink: 0;
-        margin-right: 8px;
-    }
-    .timeline-item .btn {
-        width: 100%;
-    }
-    button.active {
-        background-color: #0d6efd;
-        color: #fff;
-        border-color: #0d6efd;
-    }
-    .title {
-        font-size: 1.5rem;
-        font-weight: 650;
-        color: #004d80;
-    }
-    .text {
-        font-size: 1rem;
-        color: #004d80;
-    }
-</style>
 
 <!-- HTML -->
 
@@ -147,3 +114,35 @@
         {/if}
     </div>
 {/if}
+
+<!-- STYLE -->
+<style>
+    .timeline {
+        display: flex;
+        flex-grow: 1;
+        overflow: auto;
+        scrollbar-width: none;
+    }
+    .timeline-item {
+        min-width: 50px;
+        flex-shrink: 0;
+        margin-right: 8px;
+    }
+    .timeline-item .btn {
+        width: 100%;
+    }
+    button.active {
+        background-color: #0d6efd;
+        color: #fff;
+        border-color: #0d6efd;
+    }
+    .title {
+        font-size: 1.5rem;
+        font-weight: 650;
+        color: #004d80;
+    }
+    .text {
+        font-size: 1rem;
+        color: #004d80;
+    }
+</style>

@@ -1,33 +1,23 @@
 <script>
-    export let name="";
-    export let image;
-    export let date = "";
-    export let description="";
-    export let location="";
+    
 </script>
 
 <div class="page">
-
     <div class="title-container">
-        <h1 class="title fw-bold">{name}</h1>
-        <p> Published on {date}</p>
+        <h1 class="title">Admin Dashboard</h1>
     </div>
-
-    <div class="component-container py-5 justify-content-center">
-        <img loading="lazy" src={image} class="image" alt={name}/>
-        <p>{description}</p>
-        <p class="small mt-3">
-            Location: {location} <br>
-            Date: {date}
-        </p>
+    <div class="component-container">
+        <div class="component-header">hello</div>
+        <div class="inner-content">
+            
+        </div>
     </div>
-
 </div>
 
 <style>
     .page {
         min-height: 100vh;
-        background-image: url('../assets/blue-white-background.jpg');
+        background-image: url('../../../lib/assets/blue-white-background.jpg');
         background-size: cover;
         background-position: center;
         padding-top: 3rem;
@@ -68,12 +58,19 @@
         margin-left: auto;
         margin-right: auto;
     }
-    .component-container img {
-        border-radius: 1rem;
+    .component-header {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #004d80;
+        margin-bottom: 3rem;
+        margin-top: 0rem;
     }
-    .image {
-        width: 80%;
-        border-radius: 1rem;
-        margin-bottom: 2.5rem;
+    .component-container .inner-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 600px;
+        margin-left: auto;       
+        margin-right: auto;
     }
 </style>
