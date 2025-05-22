@@ -1,6 +1,7 @@
 <script>
     export let data;
     const weather = data.weather;
+    import Buttom from "$lib/components/Buttom.svelte";
 </script>
 
 
@@ -12,7 +13,7 @@
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
       
         <span class="navbar-toggler-icon"></span>
-      </button>
+      </button> 
       
 
       <div class="collapse navbar-collapse" id="navbarContent">
@@ -34,13 +35,18 @@
   </div>
 </nav>
 
+
 <!-- Main Content -->
 <section class="container py-5 text-center">
 <h1 class="display-4">Welcome to My Website!</h1>
 <p class="lead">This is a simple homepage built with SvelteKit and Bootstrap 5.</p>
 <a href="/about" class="btn btn-light btn-lg mt-3">Learn more</a>
 </section>
-
+<div>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSe2eRcHwOTgRsQAIxirVysdI-5pVyCWpY4IDMh1Apw6pLBY3Q/viewform?usp=header">
+    <Buttom></Buttom>
+    </a>
+</div>
 <section class="container py-5 text-center">
     <h1 class="display-4">Current Weather</h1>
   
