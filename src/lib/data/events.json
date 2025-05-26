@@ -1,0 +1,61 @@
+{
+    "events": 
+    [
+        {
+            "name": "Event 1",
+            "date": "September 1,2007",
+            "image": "https://auth.acm.org/wp-content/uploads/2021/10/meet-ACM-Facebook-banner-1536x796.png",
+            "id": "event-1",
+            "description": "Ενα event που αφοραα σδσδγσα γσδαγασγσδ γσαγσαδγσαδ γσαγσδα!",
+            "location": "Building of Biology: Mezzanine, Room Η6"
+        },
+        {
+            "name": "Event 2",
+            "date": "October 22,2007",
+            "image": "https://auth.acm.org/wp-content/uploads/2021/10/Campus-tour.png",
+            "id": "event-2",
+            "description": "Ενα event που αφοραα σδσδγσα γσδαγασγσδ γσαγσαδγσαδ γσαγσδα!",
+            "location": "Building of Biology: Mezzanine, Room Η6"
+        },
+        {
+            "name": "Event 3",
+            "date": "October 29,2025",
+            "image": "https://auth.acm.org/wp-content/uploads/2021/03/git1.png",
+            "id": "event-3",
+            "description": "Ενα event που αφοραα σδσδγσα γσδαγασγσδ γσαγσαδγσαδ γσαγσδα!",
+            "location": "Building of Biology: Mezzanine, Room Η6"
+        },
+        {
+            "name": "Event 4",
+            "date": "November 16,2007",
+            "image": "https://auth.acm.org/wp-content/uploads/2021/02/Linux-1.png",
+            "id": "event-4",
+            "description": "Ενα event που αφοραα σδσδγσα γσδαγασγσδ γσαγσαδγσαδ γσαγσδα!",
+            "location": "Building of Biology: Mezzanine, Room Η6"
+        },
+        {
+            "name": "Event 5",
+            "date": "November 24,2015",
+            "image": "https://auth.acm.org/wp-content/uploads/2022/05/Picture2.png",
+            "id": "event-5",
+            "description": "Ενα event που αφοραα σδσδγσα γσδαγασγσδ γσαγσαδγσαδ γσαγσδα!",
+            "location": "Building of Biology: Mezzanine, Room Η6"
+        },
+        {
+            "name": "Event 6",
+            "date": "December 3,2007",
+            "image": "https://auth.acm.org/wp-content/uploads/2020/12/76974937_1462395150575663_4064387411164004352_o.jpg",
+            "id": "event-6",
+            "description": "Ενα event που αφοραα σδσδγσα γσδαγασγσδ γσαγσαδγσαδ γσαγσδα!",
+            "location": "Building of Biology: Mezzanine, Room Η6"
+        },
+        {
+            "name": "Event 7",
+            "date": "December 19,2009",
+            "image": "https://auth.acm.org/wp-content/uploads/2020/12/29178681_977989562349560_3687398306025046016_o.jpg",
+            "id": "event-7",
+            "description": "Ενα event που αφοραα σδσδγσα γσδαγασγσδ γσαγσαδγσαδ γσαγσδα!",
+            "location": "Building of Biology: Mezzanine, Room Η6"
+        }
+    ]
+}

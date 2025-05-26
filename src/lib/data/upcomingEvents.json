@@ -1,0 +1,21 @@
+{
+    "upcomingEvents": 
+    [
+        {
+            "name": "Upcoming Event 1",
+            "date": "September 1,2008",
+            "image": "https://auth.acm.org/wp-content/uploads/2021/10/meet-ACM-Facebook-banner-1536x796.png",
+            "id": "upcoming-event-1",
+            "description": "Ενα event που αφοραα σδσδγσα γσδαγασγσδ γσαγσαδγσαδ γσαγσδα!",
+            "location": "Building of Biology: Mezzanine, Room Η6"
+        },
+        {
+            "name": "Upcoming Event 2",
+            "date": "October 1,2008",
+            "image": "https://auth.acm.org/wp-content/uploads/2021/10/Campus-tour.png",
+            "id": "upcoming-event-2",
+            "description": "Ενα event που αφοραα σδσδγσα γσδαγασγσδ γσαγσαδγσαδ γσαγσδα!",
+            "location": "Building of Biology: Mezzanine, Room Η6"
+        }
+    ]
+}

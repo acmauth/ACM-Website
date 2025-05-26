@@ -1,24 +1,38 @@
 <script>
-    import { events } from '$lib/data/events';
-    import { page } from '$app/stores';
+
+    import {events} from '$lib/data/events.json';
+    import {upcomingEvents} from '$lib/data/upcomingEvents.json';
+    import {page} from '$app/stores';
     import EventsPage from '$lib/components/EventsPage.svelte';
 
-    $:id=$page.params.id;
-    $:event = events.find(event=>event.id===id);
+    let id;
+	let event;
+	let upcomingEvent;
+    let selectedEvent;
 
-    if(!event){
-        console.error(`Event με ID ${id} δεν βρέθηκε.`);
-    }
+    $:{
+		if ($page.params.id) {
+			id = $page.params.id;
+			event = events.find(e => e.id === id);
+			upcomingEvent = upcomingEvents.find(e => e.id === id);
+            selectedEvent = event || upcomingEvent; 
+
+			if (!event && !upcomingEvent) {
+				console.error(`Event με ID ${id} δεν βρέθηκε.`);
+			}
+		}
+	}
+
 </script>
 
-{#if event}
+{#if selectedEvent}
     <EventsPage
-    name={event.name}
-    image={event.image}
-    date = {event.date}
-    description={event.description}
-    location={event.location}
-/>
+        name={selectedEvent.name}
+        image={selectedEvent.image}
+        date={selectedEvent.date}
+        description={selectedEvent.description}
+        location={selectedEvent.location}
+    />
 {:else}
     <div class="container mt-5">
         <p>Το event δεν βρεθηκε</p>

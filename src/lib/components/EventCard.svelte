@@ -6,14 +6,15 @@
   </script>
 
 <div class="card shadow-lg rounded-4 border border-dark">
-    <a href="/events/{id}" title={name} class="image-link ratio ratio-16x9">
+    <a href={`/events/${id}`} title={name} class="image-link ratio ratio-16x9">
         <img loading="lazy" src={image} class="card-img-top rounded-top-4 img-fluid object-fit-cover" alt={name} />
     </a>
    
     <div class="card-body text-center">
-        <a href="/" class="card-title text-dark hover-text fs-4 text-link">
-           {name}
+        <a href={`/events/${id}`} class="card-title text-dark hover-text fs-4 text-link">
+          {name}
         </a>
+
         <p class="fs-7">
             <i class="bi bi-calendar-event me-2 "> </i>
             {date}
