@@ -98,7 +98,6 @@
 <!-- Show events for selected year -->
 {#if selectedYear}
     <div class="mt-4">
-        <h3 class="title">Events in {selectedYear}</h3>
         {#if events.filter(e => new Date(e.date).getFullYear() === selectedYear).length}
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
                 {#each events as event}

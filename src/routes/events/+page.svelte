@@ -10,49 +10,38 @@
 
 <div class="page">
 
-    <div class="title-container">
-        <h1 class="title">Events</h1>
-    </div>
-    
+    <h1 class="title">Events</h1>
+
     {#if upcomingEvents.length!==0}
-        <div class="component-container">
-            <div class="inner-content">
-                <h2 class="component-header">Upcoming Events</h2>
-                <div id="upcomingEventsCarousel" class="carousel slide carousel-fade container " data-bs-ride="carousel" >
-                    <div class="carousel-inner">
-                        {#each upcomingEvents as upComingEvent ,index}
-                        <div class="carousel-item {index===0? 'active': ''}">
-                            <EventCard 
-                            name={upComingEvent.name}
-                            image={upComingEvent.image}
-                            date={upComingEvent.date}
-                            id={upComingEvent.id}
-                            />
-                        </div>
-                        {/each}
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#upcomingEventsCarousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon  " aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#upcomingEventsCarousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon text-dark" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                    </button>
+        <h2 class="component-header">Upcoming Events</h2>
+        <div class="carousel slide carousel-fade container position-relative" id="upcomingEventsCarousel"  data-bs-ride="carousel" >
+            <div class="carousel-inner">
+                {#each upcomingEvents as upComingEvent ,index}
+                <div class="carousel-item {index===0? 'active': ''}">
+                    <EventCard 
+                    name={upComingEvent.name}
+                    image={upComingEvent.image}
+                    date={upComingEvent.date}
+                    id={upComingEvent.id}
+                    />
                 </div>
+                {/each}
             </div>
+
+            <button class="carousel-control-prev" type="button" data-bs-target="#upcomingEventsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon  " aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#upcomingEventsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon text-dark" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+            </button>
         </div>
     {/if}
-    <div class="component-container">
-            <h2 class="component-header">Past Events</h2>
-            {#if events}   
-                <div class="container py-4">
-                    <Timeline {events} />
-                </div>
-            {:else}
-                    <p>No events to show</p>
-            {/if}     
-    </div>    
+    <h2 class="component-header">Past Events</h2>
+    <div class="container py-4">
+            <Timeline {events} />
+    </div>
 </div>
 
 <style>
@@ -67,34 +56,19 @@
         width: 100%;
         background-color: var(--bs-body-bg-secondary);
     }
-    .title-container {
-        display: inline-block;
-        background: #daf1fc;
-        backdrop-filter: blur(6px);
-        border-radius: 1rem;
-        text-align: center;
-        padding-top: 2rem;
-        padding-bottom: 2rem;
-        padding-left: 2rem;
-        padding-right: 2rem;
-    }
     .title {
         font-size: 3rem;
         font-weight: 800;
         color: #004d80;
         text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
-        margin: 0;
+        text-shadow: #daf1fc 2px 2px 4px;
+        margin-bottom: 4rem;
     }
-    .component-container {
+    .carousel {
         margin-top: 5rem;
-        background: #daf1fc;
         border-radius: 1rem;
-        padding-left: 0.75rem;
-        padding-right: 0.75rem;
-        padding-top: 3rem;
-        padding-bottom: 3rem;
-        box-shadow: inset 0 0 10px rgba(0, 100, 160, 0.05);
-        width: 90%;              
+        padding: 0rem;
+        width: 80%;              
         max-width: 1300px;     
         margin-left: auto;
         margin-right: auto;
@@ -103,18 +77,37 @@
         font-size: 2.5rem;
         font-weight: 700;
         color: #004d80;
-        margin-bottom: 3rem;
-        margin-top: 0rem;
-    }
-    .component-container .inner-content {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        max-width: 600px;
-        margin-left: auto;       
-        margin-right: auto;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        text-shadow: #daf1fc 2px 2px 4px;
+        margin: 3rem;
     }
     .carousel-inner {
         border-radius: 16px;
+    }
+    .carousel-control-prev, .carousel-control-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 2.5rem;
+        height: 2.5rem;
+        border: 3px solid rgba(0, 0, 0, 0.7);
+        background: transparent;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .carousel-control-prev { 
+        left: -3rem; 
+    }
+    .carousel-control-next { 
+        right: -3rem; 
+    }
+    .carousel-control-prev-icon, .carousel-control-next-icon {
+        background-size: 1rem 1rem;
+        filter: invert(1);
+    }
+    .carousel-control-prev:hover, .carousel-control-next:hover {
+        border-color: rgba(255, 255, 255, 1);
     }
 </style>
