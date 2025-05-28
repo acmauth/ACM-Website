@@ -5,6 +5,7 @@
     import {events} from '$lib/data/events.json';
     import {upcomingEvents} from '$lib/data/upcomingEvents.json';
     
+    
 
 </script>
 
@@ -14,7 +15,8 @@
 
     {#if upcomingEvents.length!==0}
         <h2 class="component-header">Upcoming Events</h2>
-        <div class="carousel slide carousel-fade container position-relative" id="upcomingEventsCarousel"  data-bs-ride="carousel" >
+        <div class = "container">
+            <div class="carousel slide carousel-fade container position-relative" id="upcomingEventsCarousel"  data-bs-ride="carousel" >
             <div class="carousel-inner">
                 {#each upcomingEvents as upComingEvent ,index}
                 <div class="carousel-item {index===0? 'active': ''}">
@@ -24,6 +26,8 @@
                     date={upComingEvent.date}
                     id={upComingEvent.id}
                     />
+                     
+                   
                 </div>
                 {/each}
             </div>
@@ -37,10 +41,14 @@
             <span class="visually-hidden">Next</span>
             </button>
         </div>
+        </div>
+        
     {/if}
+   
     <h2 class="component-header">Past Events</h2>
     <div class="container py-4">
             <Timeline {events} />
+        
     </div>
 </div>
 
