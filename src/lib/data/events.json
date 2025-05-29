@@ -144,6 +144,55 @@
             "id": "event-16",
             "description": "Ενα event που αφοραα σδσδγσα γσδαγασγσδ γσαγσαδγσαδ γσαγσδα!",
             "location": "Building of Biology: Mezzanine, Room Η6"
+        },
+        {
+            "name": "Event 1",
+            "date": "September 1,2020",
+            "image": "https://auth.acm.org/wp-content/uploads/2021/10/meet-ACM-Facebook-banner-1536x796.png",
+            "id": "event-1",
+            "description": "Ενα event που αφοραα σδσδγσα γσδαγασγσδ γσαγσαδγσαδ γσαγσδα!",
+            "location": "Building of Biology: Mezzanine, Room Η6"
+        },
+        {
+            "name": "Event 1",
+            "date": "September 1,2020",
+            "image": "https://auth.acm.org/wp-content/uploads/2021/10/meet-ACM-Facebook-banner-1536x796.png",
+            "id": "event-1",
+            "description": "Ενα event που αφοραα σδσδγσα γσδαγασγσδ γσαγσαδγσαδ γσαγσδα!",
+            "location": "Building of Biology: Mezzanine, Room Η6"
+        },
+        {
+            "name": "Event 1",
+            "date": "September 1,2015",
+            "image": "https://auth.acm.org/wp-content/uploads/2021/10/meet-ACM-Facebook-banner-1536x796.png",
+            "id": "event-1",
+            "description": "Ενα event που αφοραα σδσδγσα γσδαγασγσδ γσαγσαδγσαδ γσαγσδα!",
+            "location": "Building of Biology: Mezzanine, Room Η6"
+        },
+        {
+            "name": "Event 1",
+            "date": "September 1,2016",
+            "image": "https://auth.acm.org/wp-content/uploads/2021/10/meet-ACM-Facebook-banner-1536x796.png",
+            "id": "event-1",
+            "description": "Ενα event που αφοραα σδσδγσα γσδαγασγσδ γσαγσαδγσαδ γσαγσδα!",
+            "location": "Building of Biology: Mezzanine, Room Η6"
+        },
+        {
+            "name": "Event 1",
+            "date": "September 1,2020",
+            "image": "https://auth.acm.org/wp-content/uploads/2021/10/meet-ACM-Facebook-banner-1536x796.png",
+            "id": "event-1",
+            "description": "Ενα event που αφοραα σδσδγσα γσδαγασγσδ γσαγσαδγσαδ γσαγσδα!",
+            "location": "Building of Biology: Mezzanine, Room Η6"
+        },
+        {
+            "name": "Event 1",
+            "date": "September 1,2025",
+            "image": "https://auth.acm.org/wp-content/uploads/2021/10/meet-ACM-Facebook-banner-1536x796.png",
+            "id": "event-1",
+            "description": "Ενα event που αφοραα σδσδγσα γσδαγασγσδ γσαγσαδγσαδ γσαγσδα!",
+            "location": "Building of Biology: Mezzanine, Room Η6"
         }
+
     ]
 }
