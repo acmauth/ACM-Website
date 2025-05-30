@@ -1,4 +1,8 @@
-<script>
+<!-- <script>
+
+
+    ----------------- Replaced by EventPopUp.svelte -----------------
+
 
     import {events} from '$lib/data/events.json';
     import {upcomingEvents} from '$lib/data/upcomingEvents.json';
@@ -37,4 +41,4 @@
     <div class="container mt-5">
         <p>Το event δεν βρεθηκε</p>
     </div> 
-{/if}       
+{/if}        -->

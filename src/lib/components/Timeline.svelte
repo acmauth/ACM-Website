@@ -1,5 +1,7 @@
 <script>
+    import { createEventDispatcher } from 'svelte';
     import EventCard from '$lib/components/EventCard.svelte';
+
     export let events = [];
 
     let selectedYear;
@@ -20,6 +22,11 @@
     // Initialize selection to the last year if no year is selected 
     $: if (years.length != 0 && selectedYear === undefined) {
         selectedYear = years[0];
+    }
+
+    const dispatch = createEventDispatcher();
+    function handleSelect(e) {
+        dispatch('select', e.detail);
     }
 
     function selectYear(year) {
@@ -99,19 +106,21 @@
 
 {#if selectedYear}
     {#if events.filter(e => new Date(e.date).getFullYear() === selectedYear).length}
-      <div class="events-grid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
-        {#each events as event}
-          {#if new Date(event.date).getFullYear() === selectedYear}
-            <div class="cell">
-              <EventCard
-                name={event.name}
-                date={event.date}
-                image={event.image}
-                id={event.id} />
-            </div>
-          {/if}
-        {/each}
-      </div>
+        <div class="events-grid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+            {#each events as event}
+                {#if new Date(event.date).getFullYear() === selectedYear}
+                    <div class="cell">
+                        <EventCard
+                            name={event.name}
+                            date={event.date}
+                            image={event.image}
+                            id={event.id} 
+                            on:select={handleSelect}
+                        />
+                    </div>
+                {/if}
+            {/each}
+        </div>
     {/if}
 {/if}
 

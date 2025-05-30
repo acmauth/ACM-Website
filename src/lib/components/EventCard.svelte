@@ -1,40 +1,47 @@
 <script>
+    import { createEventDispatcher } from 'svelte';
+
     export let name="";
     export let id="";
     export let image;
     export let date = "";
+
+    const dispatch = createEventDispatcher();
+    function handleClick() {
+      dispatch('select', { id, name, image, date });
+    }
   </script>
 
-<div class="card shadow-lg rounded-4 border border-dark">
-
-  <a href={`/events/${id}`} title={name} class="image-link ratio ratio-16x9">
-    <img loading="lazy" src={image} class="card-img-top rounded-top-4 img-fluid object-fit-cover" alt={name}/>
-  </a>
-  
-  <a href={`/events/${id}`} class="card-title text-dark hover-text fs-4 mt-2 text-link">
-    <h5 class="card-title fs-4">{name}</h5>
-    <p class="fs-7 mb-2">
-      <i class="bi bi-calendar-event me-2"></i>
-      {date}
-    </p>
-  </a>
-
-</div>
+<button class="card-button" on:click={handleClick}>
+  <div class="card shadow-lg rounded-4 border border-dark">
+    <div class="ratio ratio-16x9">
+      <img loading="lazy" src={image} class="card-img-top rounded-top-4 img-fluid object-fit-cover" alt={name}/>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title fs-4">{name}</h5>
+      <p class="fs-7 mb-0">
+        <i class="bi bi-calendar-event me-2"></i>
+        {date}
+      </p>
+    </div>
+  </div>
+</button>
 
 <style>
-  .text-link{
-    text-decoration: none;
+  .card-button {
+    background: none;
+    border: none;
+    padding: 0;
+    width: 80%;
+    text-align: left;
+    cursor: pointer;
   }
-  .hover-text {
-    transition: opacity 0.3s ease; 
+  .card-button:focus {
+    outline: 3px solid rgba(0, 77, 128, 0.6);
   }
-  .hover-text:hover {
-    opacity: 0.5; 
-    text-decoration: underline;
-  }
-  .image-link {
-    display: inline-block;
-    position: relative;
+  .card-button:hover .card,
+  .card-button:focus .card {
+    transform: scale(1.05);
   }
   .card {
     transition: transform 0.3s ease;

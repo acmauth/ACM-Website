@@ -1,12 +1,18 @@
 <script>
-   
     import EventCard from '$lib/components/EventCard.svelte';
+    import EventDetails from '$lib/components/EventPopUp.svelte';
     import Timeline from '$lib/components/Timeline.svelte';
     import {events} from '$lib/data/events.json';
     import {upcomingEvents} from '$lib/data/upcomingEvents.json';
-    
-    
 
+    let selectedEvent = null;
+
+    function openDetail(e) {
+        selectedEvent = e.detail;
+    }
+    function closeDetail() {
+        selectedEvent = null;
+    }
 </script>
 
 <div class="page">
@@ -24,6 +30,7 @@
                         image={upComingEvent.image}
                         date={upComingEvent.date}
                         id={upComingEvent.id}
+                        on:select={openDetail}
                         />
                     </div>
                 {/each}
@@ -40,9 +47,13 @@
         </div>  
     {/if}
    
+    {#if selectedEvent}
+        <EventDetails {selectedEvent} on:close={closeDetail} />
+    {/if}
+
     <h2 class="component-header">Past Events</h2>
     <div class="container">
-        <Timeline {events} />
+        <Timeline {events} on:select={openDetail}/>
     </div>
 </div>
 
@@ -102,15 +113,17 @@
         border-radius: 1rem;
         padding: 0rem;
         width: 80%;              
-        max-width: 1300px;     
+        max-width: 1000px;     
         margin-left: auto;
         margin-right: auto;
-        width: 70%;
+        width: 80%;
         position: relative;
-        
     }
     .carousel-inner {
-        border-radius: 16px;
+        overflow: visible;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+
     }
     .carousel-control-prev, .carousel-control-next {
         position: absolute;
@@ -126,10 +139,10 @@
         justify-content: center;
     }
     .carousel-control-prev { 
-        left: -3rem; 
+        left: -1rem; 
     }
     .carousel-control-next { 
-        right: -3rem; 
+        right: -1rem; 
     }
     .carousel-control-prev-icon, .carousel-control-next-icon {
         background-size: 1rem 1rem;
