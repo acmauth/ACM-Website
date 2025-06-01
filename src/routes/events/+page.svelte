@@ -1,17 +1,38 @@
 <script>
     import EventCard from '$lib/components/EventCard.svelte';
     import EventDetails from '$lib/components/EventPopUp.svelte';
+    import AddEventModal from '$lib/components/AddEventModal.svelte';
     import Timeline from '$lib/components/Timeline.svelte';
-    import {events} from '$lib/data/events.json';
     import {upcomingEvents} from '$lib/data/upcomingEvents.json';
+    import {onMount} from 'svelte';
+
+    export let data;
+    let events=data.events;
+    let showModal = false;
+    const openModal = () => showModal = true;
+    const closeModal = () => showModal = false;
 
     let selectedEvent = null;
+    let isAdmin = false;
 
     function openDetail(e) {
         selectedEvent = e.detail;
     }
     function closeDetail() {
         selectedEvent = null;
+    }
+
+    onMount(()=> {
+        isAdmin = localStorage.getItem('isAdmin')==='true';
+    });
+
+    function logout(){
+        localStorage.removeItem('isAdmin');
+        location.reload();
+    }
+
+    function addEvent(){
+
     }
 </script>
 
@@ -55,6 +76,16 @@
     <div class="container">
         <Timeline {events} on:select={openDetail}/>
     </div>
+
+    {#if isAdmin}
+        <div class="admin-panel mt-4">
+            <h3>🔒 Επιλογές Διαχειριστή</h3>
+             <button class="btn btn-success mb-2" on:click={()=>{window.scrollTo({top: 0,behaviour:'smooth'}); openModal(); }}>➕ Προσθήκη Event</button>
+             <AddEventModal show={showModal} onClose={closeModal} />
+             <button class="btn btn-danger mb-2">🗑️ Διαγραφή Event</button>
+             <button class="btn btn-secondary mb-2" on:click={logout}>Αποσύνδεση</button>
+        </div>
+    {/if}
 </div>
 
 <style>

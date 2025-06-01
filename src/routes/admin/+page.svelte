@@ -6,7 +6,8 @@
 
     function checkPassword() {
         if (password === adminPassword) {
-            goto('/admin/dashboard');
+            localStorage.setItem('isAdmin','true');
+            goto('/');
         }
         else {
             alert('Incorrect password. Please try again.');

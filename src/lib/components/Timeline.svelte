@@ -1,7 +1,7 @@
 <script>
     import { createEventDispatcher } from 'svelte';
     import EventCard from '$lib/components/EventCard.svelte';
-
+    import EventsTicket from '$lib/components/EventsTicket.svelte';
     export let events = [];
 
     let selectedYear;
@@ -106,21 +106,35 @@
 
 {#if selectedYear}
     {#if events.filter(e => new Date(e.date).getFullYear() === selectedYear).length}
-        <div class="events-grid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
-            {#each events as event}
-                {#if new Date(event.date).getFullYear() === selectedYear}
-                    <div class="cell">
-                        <EventCard
+       <!-- <div class="events-grid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">--> 
+            <div>
+                {#each events as event}
+                    {#if new Date(event.date).getFullYear() === selectedYear}
+                      <!--<div class="cell">
+
+                         <EventCard
+                          name={event.name}
+                          date={event.date}
+                          image={event.image}
+                          id={event.id} 
+                          on:select={handleSelect}
+                        />                                  
+                        --> 
+                        <EventsTicket
                             name={event.name}
                             date={event.date}
                             image={event.image}
                             id={event.id} 
-                            on:select={handleSelect}
-                        />
-                    </div>
-                {/if}
-            {/each}
-        </div>
+                            location = {event.location}
+                            description = {event.description}
+                       />
+
+                       
+                       
+                        
+                    {/if}
+                {/each}
+            </div>
     {/if}
 {/if}
 
