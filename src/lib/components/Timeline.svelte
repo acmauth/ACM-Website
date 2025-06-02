@@ -1,7 +1,7 @@
 <script>
-    import { createEventDispatcher } from 'svelte';
-    import EventCard from '$lib/components/EventCard.svelte';
-    import EventsTicket from '$lib/components/EventsTicket.svelte';
+    import VerticalCarousel from './VerticalCarousel.svelte';
+    import CarouselThumbnailList from './CarouselThumbnailList.svelte';
+
     export let events = [];
 
     let selectedYear;
@@ -9,7 +9,8 @@
     let scrollContainer;
     const gapSize = 4; // Gap size between timeline items
 
-    // Create a descending set of the years that events occurred
+    let currentCarouselIndex = 0;
+
     $: {
         let yearsSet = new Set();
         for (const event of events) {
@@ -19,35 +20,34 @@
         years = Array.from(yearsSet).sort((a, b) => b - a);
     }
 
-    // Initialize selection to the last year if no year is selected 
-    $: if (years.length != 0 && selectedYear === undefined) {
+    $: if (years.length !== 0 && selectedYear === undefined) {
         selectedYear = years[0];
-    }
-
-    const dispatch = createEventDispatcher();
-    function handleSelect(e) {
-        dispatch('select', e.detail);
     }
 
     function selectYear(year) {
         selectedYear = year;
+        currentCarouselIndex = 0;
         scrollToYear(year);
     }
 
     function jumpToLatestYear() {
-        selectYear(years[0]);
-        scrollToYear(years[0]);
+        if (years.length > 0) {
+            selectYear(years[0]);
+            scrollToYear(years[0]);
+        }
     }
 
     function jumpToEarliestYear() {
-        selectYear(years[years.length - 1]);
-        scrollToYear(years[years.length - 1]);
+        if (years.length > 0) {
+            selectYear(years[years.length - 1]);
+            scrollToYear(years[years.length - 1]);
+        }
     }
 
     function scrollLeft() {
         if (scrollContainer) {
             scrollContainer.scrollBy({ left: -scrollContainer.clientWidth / 4, behavior: 'smooth' });
-        } 
+        }
     }
 
     function scrollRight() {
@@ -57,28 +57,23 @@
     }
 
     function scrollToYear(year) {
-        const idx = years.indexOf(year);
-        const item = scrollContainer.querySelectorAll('.timeline-item')[idx];
+        const item = scrollContainer.querySelector(`.timeline-item[data-year="${year}"]`);
         if (item) {
             item.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
         }
     }
+
+    $: filteredEvents = events.filter(e => new Date(e.date).getFullYear() === selectedYear);
 </script>
 
-<!-- HTML -->
-
-<!-- Timeline container -->
 <div class="timeline-container">
-    <!-- Scroll to latest year button -->
     <button class="btn btn-light me-1" on:click={jumpToLatestYear} aria-label="Jump to Latest Year">
         <i class="bi bi-chevron-double-left"></i>
     </button>
-    <!-- Scroll left button -->
     <button class="btn btn-light me-4" on:click={scrollLeft} aria-label="Scroll Left">
         <i class="bi bi-chevron-left"></i>
     </button>
 
-    <!-- Timeline -->
     <div class="timeline" bind:this={scrollContainer}>
         <div class="axis-container" style="width: {years.length * gapSize}rem; gap: {gapSize}rem;">
             <div class="axis"></div>
@@ -86,6 +81,7 @@
                 <button
                     class="timeline-item {selectedYear === year ? 'active' : ''}"
                     on:click={() => selectYear(year)}
+                    data-year={year}
                 >
                     <div class="dot"></div>
                     <div class="year {i % 2 === 0 ? 'above' : 'below'}">{year}</div>
@@ -94,55 +90,38 @@
         </div>
     </div>
 
-    <!-- Scroll right button -->
     <button class="btn btn-light ms-4" on:click={scrollRight} aria-label="Scroll Right">
         <i class="bi bi-chevron-right"></i>
     </button>
-    <!-- Scroll to earliest year -->
     <button class="btn btn-light ms-1" on:click={jumpToEarliestYear} aria-label="Jump to Earliest Year">
         <i class="bi bi-chevron-double-right"></i>
     </button>
 </div>
 
 {#if selectedYear}
-    {#if events.filter(e => new Date(e.date).getFullYear() === selectedYear).length}
-       <!-- <div class="events-grid row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">--> 
-            <div>
-                {#each events as event}
-                    {#if new Date(event.date).getFullYear() === selectedYear}
-                      <!--<div class="cell">
+    <h2 class="component-header">Events {selectedYear}</h2>
 
-                         <EventCard
-                          name={event.name}
-                          date={event.date}
-                          image={event.image}
-                          id={event.id} 
-                          on:select={handleSelect}
-                        />                                  
-                        --> 
-                        <EventsTicket
-                            name={event.name}
-                            date={event.date}
-                            image={event.image}
-                            id={event.id} 
-                            location = {event.location}
-                            description = {event.description}
-                       />
-
-                       
-                       
-                        
-                    {/if}
-                {/each}
-            </div>
+    {#if filteredEvents.length > 0}
+        <div class="carousel-and-list-container">
+            <VerticalCarousel events={filteredEvents} bind:currentIndex={currentCarouselIndex} />
+            
+            <CarouselThumbnailList
+                events={filteredEvents}
+                currentIndex={currentCarouselIndex}
+                listHeight="550px"
+            />
+        </div>
+    {:else}
+        <p class="no-events-message">Δεν υπάρχουν events για το έτος {selectedYear}.</p>
     {/if}
 {/if}
 
 <style>
-
     .timeline-container {
         display: flex;
         align-items: center;
+        justify-content: center;
+        margin-bottom: 2rem;
     }
     .timeline {
         height: 100px;
@@ -150,6 +129,11 @@
         scroll-behavior: smooth;
         scrollbar-width: none;
         position: relative;
+        flex-grow: 1;
+        max-width: 800px;
+    }
+    .timeline::-webkit-scrollbar {
+        display: none;
     }
     .axis-container {
         height: 100%;
@@ -157,6 +141,7 @@
         align-items: center;
         position: relative;
         padding-inline: 2rem;
+        box-sizing: content-box;
     }
     .axis {
         position: absolute;
@@ -165,15 +150,24 @@
         right: 0;
         height: 2px;
         background: #ccc;
+        transform: translateY(-50%);
     }
     .timeline-item {
         all: unset;
         position: relative;
         cursor: pointer;
         text-align: center;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        padding: 0 0.5rem;
     }
     .timeline-item .dot {
         position: absolute;
+        top: 50%;
         transform: translateY(-50%);
         width: 12px;
         height: 12px;
@@ -190,18 +184,51 @@
         font-weight: bold;
         color: black;
         position: absolute;
-        transform: translateX(-35%);
     }
     .timeline-item .year.above {
-        bottom: 100%;
-        margin-bottom: 8px;
+        bottom: 50%;
+        margin-bottom: 15px;
     }
     .timeline-item .year.below {
-        top: 100%;
-        margin-top: 8px;
-    }
-    .events-grid {
-        margin-top: 1.5rem;
+        top: 50%;
+        margin-top: 15px;
     }
 
+    .component-header {
+        text-align: center;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: #004d80;
+        text-shadow: #daf1fc 2px 2px 4px;
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+    }
+
+    .no-events-message {
+        text-align: center;
+        font-size: 1.2em;
+        color: #777;
+        margin-top: 30px;
+    }
+
+    /* ΝΕΟ: Χρήση Grid για τη διάταξη */
+    .carousel-and-list-container {
+        display: grid; /* Αλλαγή από flex σε grid */
+        /* Ορίζουμε δύο στήλες: η πρώτη παίρνει τον εναπομείναντα χώρο, η δεύτερη είναι 250px */
+        grid-template-columns: 1fr 250px; 
+        gap: 30px; /* Απόσταση μεταξύ των στηλών */
+        align-items: flex-start; /* Ευθυγραμμίζει τα στοιχεία στην κορυφή της γραμμής του grid */
+        margin: 0 auto 50px auto;
+        max-width: 1200px; /* Το συνολικό μέγιστο πλάτος του grid */
+    }
+
+    /* Προαιρετικά: Μπορούμε να προσθέσουμε ένα media query αν θέλουμε να αλλάζει διάταξη σε πολύ μικρές οθόνες
+       (π.χ. σε μία στήλη), αλλά για τώρα το κρατάμε αυστηρά σε δύο στήλες όπως ζητήθηκε.
+    @media (max-width: 992px) {
+        .carousel-and-list-container {
+            grid-template-columns: 1fr;
+            justify-items: center; // Κεντράρει τα στοιχεία σε μία στήλη
+        }
+    }
+    */
 </style>
