@@ -111,8 +111,8 @@
                 listHeight="550px"
             />
         </div>
-    {:else}
-        <p class="no-events-message">Δεν υπάρχουν events για το έτος {selectedYear}.</p>
+    <!-- {:else}
+        <p class="no-events-message">Δεν υπάρχουν events για το έτος {selectedYear}.</p> -->
     {/if}
 {/if}
 
@@ -121,7 +121,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        margin-bottom: 2rem;
     }
     .timeline {
         height: 100px;
@@ -129,11 +128,7 @@
         scroll-behavior: smooth;
         scrollbar-width: none;
         position: relative;
-        flex-grow: 1;
         max-width: 800px;
-    }
-    .timeline::-webkit-scrollbar {
-        display: none;
     }
     .axis-container {
         height: 100%;
@@ -141,7 +136,6 @@
         align-items: center;
         position: relative;
         padding-inline: 2rem;
-        box-sizing: content-box;
     }
     .axis {
         position: absolute;
@@ -157,13 +151,6 @@
         position: relative;
         cursor: pointer;
         text-align: center;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        flex-shrink: 0;
-        padding: 0 0.5rem;
     }
     .timeline-item .dot {
         position: absolute;
@@ -184,6 +171,7 @@
         font-weight: bold;
         color: black;
         position: absolute;
+        transform: translateX(-35%);
     }
     .timeline-item .year.above {
         bottom: 50%;
@@ -204,12 +192,12 @@
         margin-bottom: 2rem;
     }
 
-    .no-events-message {
+    /* .no-events-message {
         text-align: center;
         font-size: 1.2em;
         color: #777;
         margin-top: 30px;
-    }
+    } */
 
     /* ΝΕΟ: Χρήση Grid για τη διάταξη */
     .carousel-and-list-container {
