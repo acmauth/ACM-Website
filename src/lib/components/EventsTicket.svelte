@@ -1,7 +1,7 @@
 <script>
   export let name;
   export let location;
-  export let description;
+  // export let description;
   export let image;
   export let date;
   export let id;

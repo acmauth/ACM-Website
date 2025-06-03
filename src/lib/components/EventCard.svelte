@@ -5,10 +5,12 @@
     export let id="";
     export let image;
     export let date = "";
+    export let location = "";
+    export let description = "";
 
     const dispatch = createEventDispatcher();
     function handleClick() {
-      dispatch('select', { id, name, image, date });
+      dispatch('select', { id, name, image, date, location, description });
     }
   </script>
 

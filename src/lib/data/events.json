@@ -223,6 +223,14 @@
       "location": "Biological H3",
       "description": "fdhsa hfjsadfhdsajfh sdajf hdsajf hds fsd sha dsa ",
       "image": "https://auth.acm.org/wp-content/uploads/2021/03/git1.png"
+    },
+    {
+      "name": "delete",
+      "date": "6 10,2005",
+      "id": "event-delete",
+      "location": "spiti moy",
+      "description": "123",
+      "image": ""
     }
   ]
 }

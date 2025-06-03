@@ -103,7 +103,7 @@
 
     {#if filteredEvents.length > 0}
         <div class="carousel-and-list-container">
-            <VerticalCarousel events={filteredEvents} bind:currentIndex={currentCarouselIndex} />
+            <VerticalCarousel events={filteredEvents} bind:currentIndex={currentCarouselIndex}/>
             
             <CarouselThumbnailList
                 events={filteredEvents}
@@ -111,8 +111,6 @@
                 listHeight="550px"
             />
         </div>
-    <!-- {:else}
-        <p class="no-events-message">Δεν υπάρχουν events για το έτος {selectedYear}.</p> -->
     {/if}
 {/if}
 
@@ -191,13 +189,6 @@
         margin-top: 3rem;
         margin-bottom: 2rem;
     }
-
-    /* .no-events-message {
-        text-align: center;
-        font-size: 1.2em;
-        color: #777;
-        margin-top: 30px;
-    } */
 
     /* ΝΕΟ: Χρήση Grid για τη διάταξη */
     .carousel-and-list-container {
